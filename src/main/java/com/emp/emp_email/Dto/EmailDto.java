@@ -16,7 +16,7 @@ public class EmailDto {
     private String name;
     @Email
     private String content;
-    @JsonIgnore
-    private Employee employee;
+
+    private EmployeeDto employeeDto;
 
 }

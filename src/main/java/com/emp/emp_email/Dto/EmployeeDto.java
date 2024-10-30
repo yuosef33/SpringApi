@@ -25,7 +25,7 @@ public class EmployeeDto {
     @Min(5000)
     @Max(10000)
     private int salary;
-    @JsonIgnore
-    private List<Email> emails;
+
+    private List<EmailDto> emails;
 
 }
