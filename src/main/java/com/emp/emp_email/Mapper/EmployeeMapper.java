@@ -11,9 +11,9 @@ import java.util.List;
 @Mapper
 public interface EmployeeMapper {
 EmployeeMapper employeeMapper=Mappers.getMapper(EmployeeMapper.class);
-
+    @Mapping(target = "emails", ignore = true)
 Employee convertFromEmployeeDtoToEmployee(EmployeeDto employeeDto);
-
+    @Mapping(target = "emails", ignore = true)
 List<EmployeeDto>  convertFromEmployeeListToEmployeeDtoList(List<Employee> employees);
 
 }
