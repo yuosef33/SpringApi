@@ -23,7 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
    public void addEmployee(EmployeeDto employeeDto)  {
-        Employee emp= EmployeeMapper.employeeMapper.convertFromEmployeeDtoToEmployee(employeeDto);
+        Employee emp= EmployeeMapper.employeeMapper.toEnitiy(employeeDto);
 
         employeeDao.save(emp);
     }
@@ -37,12 +37,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
     @Override
     public List<EmployeeDto> getAllEmployee(){
-      return EmployeeMapper.employeeMapper.convertFromEmployeeListToEmployeeDtoList(employeeDao.findAll());
+      return EmployeeMapper.employeeMapper.toListDto(employeeDao.findAll());
     }
     @Override
-    public  Employee getEmployeeById(Long id){
-       return employeeDao.findById(id).get();
+    public  EmployeeDto getEmployeeById(Long id){
+
+        return EmployeeMapper.employeeMapper.toDto(employeeDao.findById(id).get());
     }
+    @Override
+    public  List<EmployeeDto> getAllEmployeeById(List<Long> ids){
+
+
+        return EmployeeMapper.employeeMapper.toListDto(employeeDao.findAllById(ids)) ;
+    }
+
     @Override
     public List<Employee> getEmployeeByName(String name){
 

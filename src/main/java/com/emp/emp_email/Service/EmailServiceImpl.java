@@ -3,10 +3,7 @@ package com.emp.emp_email.Service;
 import com.emp.emp_email.Dao.EmailDao;
 import com.emp.emp_email.Dto.EmailDto;
 import com.emp.emp_email.Mapper.EmailMapper;
-import com.emp.emp_email.Mapper.EmployeeMapper;
 import com.emp.emp_email.model.Email;
-import com.emp.emp_email.model.Employee;
-import jakarta.transaction.SystemException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +23,7 @@ public class EmailServiceImpl implements EmailService {
     public void addEmail(EmailDto emailDto)  {
 //       if (email.getId() != null) {
 //           throw new SystemException("id must be null");}
-       Email ema= EmailMapper.emailmapper.convertFromEmailDtoToEmail(emailDto);
+       Email ema= EmailMapper.emailmapper.toEntity(emailDto);
        emailDao.save(ema);
    }
     public   void removeEmail(Long id){
@@ -37,7 +34,11 @@ public class EmailServiceImpl implements EmailService {
     }
     public  List<EmailDto> getAllEmails(){
 
-       return EmailMapper.emailmapper.convertFromEmailListToEmailDtoList(emailDao.findAll());
+       return EmailMapper.emailmapper.toListDto(emailDao.findAll());
+
+    }
+    public  List<EmailDto> getAllEmailByids(List<Long> ids){
+        return EmailMapper.emailmapper.toListDto(emailDao.findAllById(ids));
 
     }
     public  List<Email> getAllEmailByName(String name){

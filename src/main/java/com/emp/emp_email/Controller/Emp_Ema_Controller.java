@@ -4,7 +4,9 @@ package com.emp.emp_email.Controller;
 import com.emp.emp_email.Dto.EmailDto;
 import com.emp.emp_email.Dto.EmployeeDto;
 import com.emp.emp_email.Service.EmailService;
+import com.emp.emp_email.Service.EmailServiceImpl;
 import com.emp.emp_email.Service.EmployeeService;
+import com.emp.emp_email.Service.EmployeeServiceImpl;
 import com.emp.emp_email.model.Email;
 import com.emp.emp_email.model.Employee;
 import jakarta.transaction.SystemException;
@@ -24,6 +26,10 @@ public class Emp_Ema_Controller {
 
 @Autowired
     private EmailService emailService;
+    @Autowired
+    private EmployeeServiceImpl employeeServiceImpl;
+    @Autowired
+    private EmailServiceImpl emailServiceImpl;
 
 
     @PostMapping("/add_Employee")
@@ -43,16 +49,22 @@ public class Emp_Ema_Controller {
     }
 @GetMapping("/getAllemployees")
 ResponseEntity<List<EmployeeDto>> getAllEmployee(){
-        return ResponseEntity.ok(employeeService.getAllEmployee());
+        return ResponseEntity.ok(employeeServiceImpl.getAllEmployee());
     }
+
     @GetMapping("/getEmployeeById")
 
-    ResponseEntity<Employee> getEmpolyeeById( @RequestParam Long id){
-       return ResponseEntity.ok().body( employeeService.getEmployeeById(id));
+    ResponseEntity<EmployeeDto> getEmpolyeeById( @RequestParam Long id){
+       return ResponseEntity.ok().body( employeeServiceImpl.getEmployeeById(id));
+    }
+    @GetMapping("/getAllEmployeeByIds")
+
+    ResponseEntity<List<EmployeeDto>> getAllEmpolyeeByIds( @RequestParam List<Long> ids){
+        return ResponseEntity.ok().body( employeeServiceImpl.getAllEmployeeById(ids));
     }
     @GetMapping("/getEmployeeByName")
     List<Employee> getEmpolyeeByName( @RequestParam String name){
-      return  employeeService.getEmployeeByName(name);
+      return  employeeServiceImpl.getEmployeeByName(name);
     }
 
     // Email-------------------------------------------
@@ -76,6 +88,10 @@ ResponseEntity<List<EmployeeDto>> getAllEmployee(){
     @GetMapping("/getAlleEmails")
     ResponseEntity<List<EmailDto>> getAllEmails(){
         return ResponseEntity.ok(emailService.getAllEmails());
+    }
+    @GetMapping("/getAllEmailsByIds")
+    ResponseEntity<List<EmailDto>> getAllEmailsById( @RequestParam List<Long>ids){
+        return ResponseEntity.ok(emailServiceImpl.getAllEmailByids(ids));
     }
     @GetMapping("/getEmailsByName")
     List<Email> getEmailByname(@RequestParam String name){

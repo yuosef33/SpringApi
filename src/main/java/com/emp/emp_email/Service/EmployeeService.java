@@ -13,7 +13,8 @@ public interface EmployeeService {
    void removeEmployee(Long id);
    void updateEmployee(Employee employee);
    List<EmployeeDto> getAllEmployee();
-   Employee getEmployeeById(Long id);
+   List<EmployeeDto> getAllEmployeeById(List<Long> ids);
+   EmployeeDto getEmployeeById(Long id);
     List<Employee> getEmployeeByName(String name);
 
 }

@@ -1,6 +1,7 @@
 package com.emp.emp_email.model;
 
 import com.emp.emp_email.model.Employee;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
